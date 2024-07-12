@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { supabase } from '@/supabaseClient';
 import { useRouter } from 'next/navigation';
 import { FaHeart } from "react-icons/fa"; 
+import Image from 'next/image';
 const Login = () => {
   const router = useRouter();
 
@@ -17,7 +18,7 @@ const Login = () => {
   useEffect(() => {
     const checkUser = async () => {
       const { data } = await supabase.auth.getSession();
-      if (data?.user) {
+      if (data.session) {
         router.push('/generator'); // Redirect to generator page if user session exists
       }
     };
@@ -38,7 +39,7 @@ const Login = () => {
           onClick={handleGoogleLogin}
           className="rounded-lg border-2 p-2 sm:px-4 flex justify-center items-center mx-auto sm:gap-2"
         >
-          <img
+          <Image
             src="https://static-00.iconduck.com/assets.00/google-icon-2048x2048-pks9lbdv.png"
             alt="google"
             className="w-8 h-8 sm:w-10 sm:h-10"
